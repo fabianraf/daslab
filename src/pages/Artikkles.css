@@ -192,3 +192,32 @@
 .nouns-table tbody tr:hover .row-icon {
   color: var(--text);
 }
+
+/* Traducción debajo del sustantivo solo en móvil (oculta en escritorio) */
+.word-translation-mobile {
+  display: none;
+}
+
+/* Móvil: quitar columna icono y traducción; significado debajo del sustantivo en cursiva */
+@media (max-width: 640px) {
+  .col-icon,
+  .nouns-table th.col-icon,
+  .nouns-table td.col-icon {
+    display: none;
+  }
+
+  .col-translation,
+  .nouns-table th.col-translation,
+  .nouns-table td.col-translation {
+    display: none;
+  }
+
+  .word-translation-mobile {
+    display: block;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--text-muted);
+    font-size: 0.9em;
+    margin-top: 0.2rem;
+  }
+}

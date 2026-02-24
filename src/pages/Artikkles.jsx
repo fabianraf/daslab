@@ -77,7 +77,10 @@ export default function Artikkles() {
                       <td className="col-icon">
                         <NounIcon name={noun.icon} size={24} className="row-icon" />
                       </td>
-                      <td className="col-word">{noun.word}</td>
+                      <td className="col-word">
+                        <span className="word-main">{noun.word}</span>
+                        <span className="word-translation-mobile">{noun.translation}</span>
+                      </td>
                       <td className="col-article">{noun.article}</td>
                       <td className="col-plural">{noun.plural ?? '—'}</td>
                       <td className="col-translation">{noun.translation}</td>
