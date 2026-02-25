@@ -9,28 +9,95 @@
   margin-bottom: 2rem;
 }
 
+/* Links a otras secciones: Practicar y Grammatik */
 .artikkles-nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem 1.25rem;
-  margin-bottom: 0.5rem;
+  gap: 0.5rem 0.75rem;
+  margin-bottom: 1rem;
 }
 
-.artikkles-nav .back-link {
-  margin-bottom: 0;
-}
-
-.back-link {
-  display: inline-block;
-  color: var(--text-muted);
-  text-decoration: none;
+.artikkles-section-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
   font-size: 0.9rem;
-  margin-bottom: 0.75rem;
-  transition: color 0.15s ease;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.back-link:hover {
-  color: var(--accent);
+.artikkles-section-link:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.artikkles-section-link--practicar {
+  background: linear-gradient(135deg, var(--accent) 0%, #c084fc 100%);
+  color: #fff;
+}
+
+.artikkles-section-link--practicar:hover {
+  color: #fff;
+}
+
+.artikkles-section-link--grammatik {
+  background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+  color: #fff;
+}
+
+.artikkles-section-link--grammatik:hover {
+  color: #fff;
+}
+
+/* Buscadores */
+.artikkles-search {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.artikkles-search-label {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.artikkles-search-input {
+  font-family: inherit;
+  font-size: 0.95rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+}
+
+.artikkles-search-input::placeholder {
+  color: var(--text-muted);
+  opacity: 0.8;
+}
+
+.artikkles-search-input:hover,
+.artikkles-search-input:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+
+@media (max-width: 480px) {
+  .artikkles-search {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+  .artikkles-search-label { margin-top: 0.5rem; }
+  .artikkles-search-label:first-child { margin-top: 0; }
 }
 
 .artikkles-title {

@@ -10,13 +10,26 @@ const LABELS = {
   das: { label: 'das', subtitle: 'neutro / sächlich', className: 'art-das' },
 }
 
+function normalizeForSearch(str) {
+  return str
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/\p{Diacritic}/gu, '')
+}
+
 export default function Artikkles() {
   const [categoryId, setCategoryId] = useState('todos')
+  const [searchDe, setSearchDe] = useState('')
+  const [searchEs, setSearchEs] = useState('')
 
   const filteredNouns = useMemo(() => {
-    if (categoryId === 'todos') return NOUNS
-    return NOUNS.filter((n) => getCategory(n) === categoryId)
-  }, [categoryId])
+    let list = categoryId === 'todos' ? NOUNS : NOUNS.filter((n) => getCategory(n) === categoryId)
+    const de = normalizeForSearch(searchDe).trim()
+    const es = normalizeForSearch(searchEs).trim()
+    if (de) list = list.filter((n) => normalizeForSearch(n.word).includes(de) || normalizeForSearch(n.plural ?? '').includes(de))
+    if (es) list = list.filter((n) => normalizeForSearch(n.translation).includes(es))
+    return list
+  }, [categoryId, searchDe, searchEs])
 
   const byArticle = useMemo(() => ({
     der: filteredNouns.filter((n) => n.article === 'der'),
@@ -27,12 +40,34 @@ export default function Artikkles() {
   return (
     <div className="artikkles-page">
       <header className="artikkles-header">
-        <div className="artikkles-nav">
-          <Link to="/practicar" className="back-link">→ Practicar / Üben</Link>
-          <Link to="/grammatik" className="back-link">Grammatik (Akkusativ, Dativ, Imperativ)</Link>
-        </div>
+        <nav className="artikkles-nav" aria-label="Otras secciones">
+          <Link to="/practicar" className="artikkles-section-link artikkles-section-link--practicar">→ Practicar / Üben</Link>
+          <Link to="/grammatik" className="artikkles-section-link artikkles-section-link--grammatik">Grammatik (Akkusativ, Dativ, Imperativ)</Link>
+        </nav>
         <h1 className="artikkles-title">Artículos / Artikel</h1>
         <p className="artikkles-subtitle">Lista completa por tipo / Vollständige Liste (der / die / das)</p>
+        <div className="artikkles-search">
+          <label htmlFor="search-de" className="artikkles-search-label">Buscar en alemán</label>
+          <input
+            id="search-de"
+            type="search"
+            className="artikkles-search-input"
+            placeholder="z.B. Apfel, Buch…"
+            value={searchDe}
+            onChange={(e) => setSearchDe(e.target.value)}
+            aria-label="Buscar por palabra en alemán"
+          />
+          <label htmlFor="search-es" className="artikkles-search-label">Buscar en español</label>
+          <input
+            id="search-es"
+            type="search"
+            className="artikkles-search-input"
+            placeholder="ej. manzana, libro…"
+            value={searchEs}
+            onChange={(e) => setSearchEs(e.target.value)}
+            aria-label="Buscar por traducción en español"
+          />
+        </div>
         <div className="category-filter">
           <label htmlFor="category-select" className="category-label">Categoría / Kategorie:</label>
           <select

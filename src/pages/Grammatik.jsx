@@ -64,10 +64,10 @@ export default function Grammatik() {
   return (
     <div className="grammatik-page">
       <header className="grammatik-header">
-        <div className="grammatik-nav">
-          <Link to="/" className="back-link">← Inicio / Start</Link>
-          <Link to="/practicar" className="back-link">→ Practicar / Üben</Link>
-        </div>
+        <nav className="grammatik-nav" aria-label="Otras secciones">
+          <Link to="/" className="grammatik-section-link grammatik-section-link--table">← Inicio / Start</Link>
+          <Link to="/practicar" className="grammatik-section-link grammatik-section-link--practice">→ Practicar / Üben</Link>
+        </nav>
         <h1 className="grammatik-title">Grammatik</h1>
         <p className="grammatik-subtitle">Akkusativ, Dativ, Imperativ</p>
       </header>

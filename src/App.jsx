@@ -1,6 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { NOUNS } from './data/nouns'
+import { CATEGORIES, NOUNS, getCategory } from './data/nouns'
 import { NounIcon } from './components/NounIcon'
 import './App.css'
 
@@ -19,12 +19,30 @@ function shuffle(array) {
   return arr
 }
 
+function buildDeck(mode, categoryId) {
+  if (mode === 'all') return shuffle(NOUNS)
+  if (mode === 'random20') return shuffle(NOUNS).slice(0, Math.min(20, NOUNS.length))
+
+  const categoryNouns = NOUNS.filter((n) => getCategory(n) === categoryId)
+  return shuffle(categoryNouns).slice(0, Math.min(20, categoryNouns.length))
+}
+
 export default function App() {
-  const [deck, setDeck] = useState(() => shuffle(NOUNS))
+  const [mode, setMode] = useState('all')
+  const [categoryId, setCategoryId] = useState('lugares')
+  const [deck, setDeck] = useState(() => buildDeck('all', 'lugares'))
   const [currentIndex, setCurrentIndex] = useState(0)
   const [score, setScore] = useState({ correct: 0, total: 0 })
   const [feedback, setFeedback] = useState(null)
   const [showTranslation, setShowTranslation] = useState(false)
+
+  useEffect(() => {
+    setDeck(buildDeck(mode, categoryId))
+    setCurrentIndex(0)
+    setScore({ correct: 0, total: 0 })
+    setFeedback(null)
+    setShowTranslation(false)
+  }, [mode, categoryId])
 
   const current = deck[currentIndex]
   const isLast = currentIndex >= deck.length - 1
@@ -42,7 +60,7 @@ export default function App() {
     setFeedback(null)
     setShowTranslation(false)
     if (isLast) {
-      setDeck(shuffle(NOUNS))
+      setDeck(buildDeck(mode, categoryId))
       setCurrentIndex(0)
     } else {
       setCurrentIndex((i) => i + 1)
@@ -67,7 +85,62 @@ export default function App() {
           <span className="title-lab">Lab</span>
         </h1>
         <p className="subtitle">Practica los artículos en alemán / Artikel üben</p>
-        <Link to="/" className="nav-link">← Ver tabla de artículos / Tabelle</Link>
+        <nav className="practice-nav" aria-label="Otras secciones">
+          <Link to="/" className="practice-section-link practice-section-link--table">
+            ← Tabla / Artikel
+          </Link>
+          <Link to="/grammatik" className="practice-section-link practice-section-link--grammatik">
+            Grammatik
+          </Link>
+        </nav>
+
+        <div className="mode-panel">
+          <p className="mode-label">Modo de práctica</p>
+          <div className="mode-buttons" role="group" aria-label="Modo de práctica">
+            <button
+              type="button"
+              className={`mode-btn ${mode === 'random20' ? 'active' : ''}`}
+              onClick={() => setMode('random20')}
+            >
+              20 randómico
+            </button>
+            <button
+              type="button"
+              className={`mode-btn ${mode === 'category20' ? 'active' : ''}`}
+              onClick={() => setMode('category20')}
+            >
+              20 por categoría
+            </button>
+            <button
+              type="button"
+              className={`mode-btn ${mode === 'all' ? 'active' : ''}`}
+              onClick={() => setMode('all')}
+            >
+              Completo
+            </button>
+          </div>
+
+          {mode === 'category20' && (
+            <div className="mode-category">
+              <label htmlFor="practice-category" className="mode-category-label">
+                Categoría:
+              </label>
+              <select
+                id="practice-category"
+                className="mode-category-select"
+                value={categoryId}
+                onChange={(e) => setCategoryId(e.target.value)}
+              >
+                {CATEGORIES.filter((c) => c.id !== 'todos').map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
+        </div>
+
         <div className="stats">
           <span className="stat">
             <strong>{score.correct}</strong> / {score.total} correctas / richtig
