@@ -197,6 +197,119 @@
   padding: 0.5rem;
 }
 
+.verben-exercise {
+  margin-top: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1rem;
+}
+
+.verben-exercise-head h2 {
+  margin: 0 0 0.25rem 0;
+  font-size: 1.1rem;
+}
+
+.verben-exercise-head p {
+  margin: 0 0 0.75rem 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.exercise-progress {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 0.65rem;
+}
+
+.exercise-prompt {
+  margin: 0 0 0.85rem 0;
+  font-size: 1rem;
+}
+
+.exercise-prompt span {
+  color: var(--text-muted);
+}
+
+.exercise-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.exercise-option {
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  border-radius: 10px;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.exercise-option:hover:not(:disabled) {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.exercise-option.correct {
+  border-color: var(--correct);
+  background: rgba(34, 197, 94, 0.15);
+  color: var(--correct);
+}
+
+.exercise-option.reveal-correct {
+  border-color: var(--correct);
+  background: rgba(34, 197, 94, 0.2);
+  color: var(--correct);
+}
+
+.exercise-option.wrong {
+  border-color: var(--wrong);
+  background: rgba(239, 68, 68, 0.15);
+  color: var(--wrong);
+}
+
+.exercise-feedback {
+  margin-top: 0.85rem;
+}
+
+.exercise-feedback p {
+  margin: 0 0 0.6rem 0;
+}
+
+.exercise-feedback.correct {
+  color: var(--correct);
+}
+
+.exercise-feedback.wrong {
+  color: var(--wrong);
+}
+
+.exercise-next {
+  border: none;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #fff;
+  padding: 0.55rem 0.85rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.exercise-next:hover {
+  background: var(--accent-hover);
+}
+
+.exercise-result p {
+  margin: 0 0 0.7rem 0;
+}
+
 @media (max-width: 760px) {
   .verben-main {
     grid-template-columns: 1fr;
@@ -211,5 +324,9 @@
   .verben-search {
     grid-template-columns: 1fr;
     gap: 0.25rem;
+  }
+
+  .exercise-options {
+    grid-template-columns: 1fr;
   }
 }
