@@ -51,6 +51,15 @@
   color: #fff;
 }
 
+.artikkles-section-link--verben {
+  background: linear-gradient(135deg, #10b981 0%, #22c55e 100%);
+  color: #fff;
+}
+
+.artikkles-section-link--verben:hover {
+  color: #fff;
+}
+
 /* Buscadores */
 .artikkles-search {
   display: grid;

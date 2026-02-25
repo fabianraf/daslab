@@ -43,6 +43,7 @@ export default function Artikkles() {
         <nav className="artikkles-nav" aria-label="Otras secciones">
           <Link to="/practicar" className="artikkles-section-link artikkles-section-link--practicar">→ Practicar / Üben</Link>
           <Link to="/grammatik" className="artikkles-section-link artikkles-section-link--grammatik">Grammatik (Akkusativ, Dativ, Imperativ)</Link>
+          <Link to="/verben" className="artikkles-section-link artikkles-section-link--verben">Verbos / Verben</Link>
         </nav>
         <h1 className="artikkles-title">Artículos / Artikel</h1>
         <p className="artikkles-subtitle">Lista completa por tipo / Vollständige Liste (der / die / das)</p>

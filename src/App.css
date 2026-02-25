@@ -72,12 +72,23 @@
   background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
 }
 
+.practice-section-link--verben {
+  background: linear-gradient(135deg, #10b981 0%, #22c55e 100%);
+}
+
 .mode-panel {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 0.85rem;
   margin-bottom: 1rem;
+}
+
+.practice-type-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .mode-label {
@@ -229,6 +240,16 @@
   font-style: italic;
 }
 
+.dativ-phrase {
+  font-size: 1.9rem;
+}
+
+.dativ-pattern {
+  margin: 0.75rem 0 0 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
 .articles {
   display: flex;
   gap: 0.75rem;
@@ -349,6 +370,7 @@
 }
 
 @media (max-width: 520px) {
+  .practice-type-buttons,
   .mode-buttons {
     grid-template-columns: 1fr;
   }

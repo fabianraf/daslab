@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import App from './App.jsx'
 import Artikkles from './pages/Artikkles.jsx'
 import Grammatik from './pages/Grammatik.jsx'
+import Verben from './pages/Verben.jsx'
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -13,6 +14,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/" element={<Artikkles />} />
         <Route path="/practicar" element={<App />} />
         <Route path="/grammatik" element={<Grammatik />} />
+        <Route path="/verben" element={<Verben />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,

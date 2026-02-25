@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { CATEGORIES, NOUNS, getCategory } from './data/nouns'
 import { NounIcon } from './components/NounIcon'
@@ -8,6 +8,32 @@ const ARTICLES = [
   { id: 'der', label: 'der', color: 'var(--der)' },
   { id: 'die', label: 'die', color: 'var(--die)' },
   { id: 'das', label: 'das', color: 'var(--das)' },
+]
+
+const PRACTICE_TYPES = [
+  { id: 'artikel', label: 'Artículos (der / die / das)' },
+  { id: 'dativ', label: 'Dativ (dem/der + ein/kein)' },
+]
+
+const DATIV_PATTERNS = [
+  {
+    id: 'definite',
+    label: 'Definido: der/die/das',
+    options: ['dem', 'der'],
+    getExpected: (article) => (article === 'die' ? 'der' : 'dem'),
+  },
+  {
+    id: 'indefinite',
+    label: 'Indefinido: ein/eine',
+    options: ['einem', 'einer'],
+    getExpected: (article) => (article === 'die' ? 'einer' : 'einem'),
+  },
+  {
+    id: 'negative',
+    label: 'Negación: kein/keine',
+    options: ['keinem', 'keiner'],
+    getExpected: (article) => (article === 'die' ? 'keiner' : 'keinem'),
+  },
 ]
 
 function shuffle(array) {
@@ -27,30 +53,62 @@ function buildDeck(mode, categoryId) {
   return shuffle(categoryNouns).slice(0, Math.min(20, categoryNouns.length))
 }
 
+function buildDativDeck(baseDeck) {
+  return baseDeck.map((noun) => {
+    const pattern = DATIV_PATTERNS[Math.floor(Math.random() * DATIV_PATTERNS.length)]
+    const expected = pattern.getExpected(noun.article)
+    return {
+      noun,
+      patternId: pattern.id,
+      patternLabel: pattern.label,
+      options: pattern.options,
+      expected,
+      phrase: `mit ___ ${noun.word}`,
+      solutionPhrase: `mit ${expected} ${noun.word}`,
+    }
+  })
+}
+
 export default function App() {
+  const [practiceType, setPracticeType] = useState('artikel')
   const [mode, setMode] = useState('all')
   const [categoryId, setCategoryId] = useState('lugares')
   const [deck, setDeck] = useState(() => buildDeck('all', 'lugares'))
   const [currentIndex, setCurrentIndex] = useState(0)
   const [score, setScore] = useState({ correct: 0, total: 0 })
   const [feedback, setFeedback] = useState(null)
+  const [selectedAnswer, setSelectedAnswer] = useState(null)
   const [showTranslation, setShowTranslation] = useState(false)
+
+  const dativQuestions = useMemo(() => buildDativDeck(deck), [deck])
 
   useEffect(() => {
     setDeck(buildDeck(mode, categoryId))
     setCurrentIndex(0)
     setScore({ correct: 0, total: 0 })
     setFeedback(null)
+    setSelectedAnswer(null)
     setShowTranslation(false)
   }, [mode, categoryId])
 
+  useEffect(() => {
+    setCurrentIndex(0)
+    setScore({ correct: 0, total: 0 })
+    setFeedback(null)
+    setSelectedAnswer(null)
+    setShowTranslation(false)
+  }, [practiceType])
+
   const current = deck[currentIndex]
+  const currentDativ = dativQuestions[currentIndex]
   const isLast = currentIndex >= deck.length - 1
   const progress = deck.length ? ((currentIndex + 1) / deck.length) * 100 : 0
 
-  const handleAnswer = (article) => {
+  const handleAnswer = (answer) => {
     if (feedback !== null) return
-    const correct = article === current.article
+    const expected = practiceType === 'artikel' ? current.article : currentDativ.expected
+    const correct = answer === expected
+    setSelectedAnswer(answer)
     setScore((s) => ({ correct: s.correct + (correct ? 1 : 0), total: s.total + 1 }))
     setFeedback(correct ? 'correct' : 'wrong')
     setShowTranslation(true)
@@ -58,6 +116,7 @@ export default function App() {
 
   const nextWord = () => {
     setFeedback(null)
+    setSelectedAnswer(null)
     setShowTranslation(false)
     if (isLast) {
       setDeck(buildDeck(mode, categoryId))
@@ -92,9 +151,26 @@ export default function App() {
           <Link to="/grammatik" className="practice-section-link practice-section-link--grammatik">
             Grammatik
           </Link>
+          <Link to="/verben" className="practice-section-link practice-section-link--verben">
+            Verbos / Verben
+          </Link>
         </nav>
 
         <div className="mode-panel">
+          <p className="mode-label">Entrenamiento</p>
+          <div className="practice-type-buttons" role="group" aria-label="Tipo de entrenamiento">
+            {PRACTICE_TYPES.map((t) => (
+              <button
+                key={t.id}
+                type="button"
+                className={`mode-btn ${practiceType === t.id ? 'active' : ''}`}
+                onClick={() => setPracticeType(t.id)}
+              >
+                {t.label}
+              </button>
+            ))}
+          </div>
+
           <p className="mode-label">Modo de práctica</p>
           <div className="mode-buttons" role="group" aria-label="Modo de práctica">
             <button
@@ -156,33 +232,52 @@ export default function App() {
 
       <main className="practice">
         <div className="word-card">
-          <p className="word-label">¿Qué artículo lleva? / Welcher Artikel?</p>
+          <p className="word-label">
+            {practiceType === 'artikel'
+              ? '¿Qué artículo lleva? / Welcher Artikel?'
+              : 'Completa en Dativ / Ergänze im Dativ'}
+          </p>
           <div className="word-card-icon">
             <NounIcon name={current.icon} size={56} />
           </div>
-          <p className="word">{current.word}</p>
+          {practiceType === 'artikel' ? (
+            <p className="word">{current.word}</p>
+          ) : (
+            <>
+              <p className="word dativ-phrase">{currentDativ.phrase}</p>
+              <p className="dativ-pattern">{currentDativ.patternLabel}</p>
+            </>
+          )}
           {showTranslation && (
             <p className="translation">{current.translation}</p>
           )}
         </div>
 
         <div className="articles">
-          {ARTICLES.map(({ id, label, color }) => (
-            <button
-              key={id}
-              type="button"
-              className={`article-btn ${feedback !== null ? 'disabled' : ''} ${
-                feedback === 'wrong' && current.article === id ? 'reveal-correct' : ''
-              } ${feedback === 'correct' && id === current.article ? 'correct' : ''} ${
-                feedback === 'wrong' && id === current.article ? 'wrong' : ''
-              }`}
-              style={{ '--article-color': color }}
-              onClick={() => handleAnswer(id)}
-              disabled={feedback !== null}
-            >
-              {label}
-            </button>
-          ))}
+          {(practiceType === 'artikel'
+            ? ARTICLES.map(({ id, label, color }) => ({ id, label, color }))
+            : currentDativ.options.map((opt) => ({ id: opt, label: opt, color: 'var(--accent)' }))).map(({ id, label, color }) => {
+              const expected = practiceType === 'artikel' ? current.article : currentDativ.expected
+              const isSelectedWrong = feedback === 'wrong' && selectedAnswer === id && id !== expected
+              const isExpected = id === expected
+
+              return (
+                <button
+                  key={id}
+                  type="button"
+                  className={`article-btn ${feedback !== null ? 'disabled' : ''} ${
+                    feedback === 'wrong' && isExpected ? 'reveal-correct' : ''
+                  } ${feedback === 'correct' && isExpected ? 'correct' : ''} ${
+                    isSelectedWrong ? 'wrong' : ''
+                  }`}
+                  style={{ '--article-color': color }}
+                  onClick={() => handleAnswer(id)}
+                  disabled={feedback !== null}
+                >
+                  {label}
+                </button>
+              )
+            })}
         </div>
 
         {feedback !== null && (
@@ -190,7 +285,16 @@ export default function App() {
             {feedback === 'correct' ? (
               <p>✓ Correcto / Richtig</p>
             ) : (
-              <p>Lo correcto es / Richtig ist <strong>{current.article}</strong> {current.word}</p>
+              <p>
+                Lo correcto es / Richtig ist{' '}
+                <strong>{practiceType === 'artikel' ? current.article : currentDativ.expected}</strong>{' '}
+                {current.word}
+                {practiceType === 'dativ' ? (
+                  <>
+                    {' '}→ <strong>{currentDativ.solutionPhrase}</strong>
+                  </>
+                ) : null}
+              </p>
             )}
             <button type="button" className="next-btn" onClick={nextWord}>
               {isLast ? 'Empezar de nuevo / Von vorn' : 'Siguiente / Weiter'}

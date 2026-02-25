@@ -1,0 +1,215 @@
+.verben-page {
+  min-height: 100vh;
+  padding: 1.5rem;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.verben-header {
+  margin-bottom: 1rem;
+}
+
+.verben-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.verben-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: #fff;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.verben-link:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  color: #fff;
+}
+
+.verben-link--table {
+  background: linear-gradient(135deg, var(--accent) 0%, #c084fc 100%);
+}
+
+.verben-link--practice {
+  background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+}
+
+.verben-link--grammatik {
+  background: linear-gradient(135deg, #10b981 0%, #22c55e 100%);
+}
+
+.verben-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem 0;
+}
+
+.verben-subtitle {
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.verben-search {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  margin: 1rem 0 1.25rem 0;
+  padding: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.verben-search-label {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.verben-search-input {
+  font-family: inherit;
+  font-size: 0.95rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+}
+
+.verben-search-input:hover,
+.verben-search-input:focus {
+  border-color: var(--accent);
+  outline: none;
+}
+
+.verben-main {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 1rem;
+}
+
+.verben-list,
+.verben-detail {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.verben-list {
+  max-height: 65vh;
+  overflow: auto;
+  padding: 0.75rem;
+}
+
+.verb-item {
+  width: 100%;
+  text-align: left;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  border-radius: 10px;
+  padding: 0.65rem 0.75rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.verb-item:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.verb-item.active {
+  border-color: var(--accent);
+  background: rgba(139, 92, 246, 0.16);
+}
+
+.verb-item-de {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+}
+
+.verb-item-es {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.verben-detail {
+  padding: 1rem;
+}
+
+.verben-detail-title {
+  margin: 0 0 0.75rem 0;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.verben-detail-title span {
+  font-size: 1.3rem;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.verben-detail-title small {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.verben-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.verben-table th,
+.verben-table td {
+  border-top: 1px solid var(--border);
+  padding: 0.55rem 0.6rem;
+  text-align: left;
+}
+
+.verben-table th {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.verben-table td:first-child {
+  font-family: 'JetBrains Mono', monospace;
+  width: 45%;
+}
+
+.verben-empty {
+  color: var(--text-muted);
+  margin: 0;
+  padding: 0.5rem;
+}
+
+@media (max-width: 760px) {
+  .verben-main {
+    grid-template-columns: 1fr;
+  }
+
+  .verben-list {
+    max-height: 45vh;
+  }
+}
+
+@media (max-width: 520px) {
+  .verben-search {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+}
