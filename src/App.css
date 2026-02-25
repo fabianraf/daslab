@@ -68,6 +68,10 @@
   background: linear-gradient(135deg, var(--accent) 0%, #c084fc 100%);
 }
 
+.practice-section-link--inicio {
+  background: linear-gradient(135deg, #4b5563 0%, #6b7280 100%);
+}
+
 .practice-section-link--grammatik {
   background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
 }

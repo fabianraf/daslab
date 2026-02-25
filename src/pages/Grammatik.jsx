@@ -65,7 +65,8 @@ export default function Grammatik() {
     <div className="grammatik-page">
       <header className="grammatik-header">
         <nav className="grammatik-nav" aria-label="Otras secciones">
-          <Link to="/" className="grammatik-section-link grammatik-section-link--table">← Inicio / Start</Link>
+          <Link to="/" className="grammatik-section-link grammatik-section-link--inicio">← Inicio / Start</Link>
+          <Link to="/artikel" className="grammatik-section-link grammatik-section-link--table">Artículos / Artikel</Link>
           <Link to="/ueben" className="grammatik-section-link grammatik-section-link--practice">→ Practicar / Üben</Link>
           <Link to="/verben" className="grammatik-section-link grammatik-section-link--verben">Verbos / Verben</Link>
         </nav>

@@ -154,8 +154,11 @@ export default function App() {
         </h1>
         <p className="subtitle">Practica los artículos en alemán / Artikel üben</p>
         <nav className="practice-nav" aria-label="Otras secciones">
+          <Link to="/" className="practice-section-link practice-section-link--inicio">
+            ← Inicio / Start
+          </Link>
           <Link to="/artikel" className="practice-section-link practice-section-link--table">
-            ← Tabla / Artikel
+            Artículos / Artikel
           </Link>
           <Link to="/grammatik" className="practice-section-link practice-section-link--grammatik">
             Grammatik

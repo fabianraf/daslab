@@ -112,7 +112,8 @@ export default function Verben() {
     <div className="verben-page">
       <header className="verben-header">
         <nav className="verben-nav" aria-label="Otras secciones">
-          <Link to="/artikel" className="verben-link verben-link--table">← Tabla / Artikel</Link>
+          <Link to="/" className="verben-link verben-link--inicio">← Inicio / Start</Link>
+          <Link to="/artikel" className="verben-link verben-link--table">Artículos / Artikel</Link>
           <Link to="/ueben" className="verben-link verben-link--practice">→ Practicar / Üben</Link>
           <Link to="/grammatik" className="verben-link verben-link--grammatik">Grammatik</Link>
         </nav>
