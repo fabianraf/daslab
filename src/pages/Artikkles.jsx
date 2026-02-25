@@ -17,6 +17,15 @@ function normalizeForSearch(str) {
     .replace(/\p{Diacritic}/gu, '')
 }
 
+function speakNoun(article, word) {
+  if (typeof window === 'undefined' || !window.speechSynthesis) return
+  const utterance = new SpeechSynthesisUtterance(`${article} ${word}`)
+  utterance.lang = 'de-DE'
+  utterance.rate = 0.9
+  window.speechSynthesis.cancel()
+  window.speechSynthesis.speak(utterance)
+}
+
 export default function Artikkles() {
   const [categoryId, setCategoryId] = useState('todos')
   const [searchDe, setSearchDe] = useState('')
@@ -41,7 +50,8 @@ export default function Artikkles() {
     <div className="artikkles-page">
       <header className="artikkles-header">
         <nav className="artikkles-nav" aria-label="Otras secciones">
-          <Link to="/practicar" className="artikkles-section-link artikkles-section-link--practicar">→ Practicar / Üben</Link>
+          <Link to="/" className="artikkles-section-link artikkles-section-link--inicio">← Inicio / Start</Link>
+          <Link to="/ueben" className="artikkles-section-link artikkles-section-link--practicar">→ Practicar / Üben</Link>
           <Link to="/grammatik" className="artikkles-section-link artikkles-section-link--grammatik">Grammatik (Akkusativ, Dativ, Imperativ)</Link>
           <Link to="/verben" className="artikkles-section-link artikkles-section-link--verben">Verbos / Verben</Link>
         </nav>
@@ -114,7 +124,18 @@ export default function Artikkles() {
                         <NounIcon name={noun.icon} size={24} className="row-icon" />
                       </td>
                       <td className="col-word">
-                        <span className="word-main">{noun.word}</span>
+                        <span className="word-main-row">
+                          <span className="word-main">{noun.word}</span>
+                          <button
+                            type="button"
+                            className="speak-btn"
+                            onClick={() => speakNoun(noun.article, noun.word)}
+                            aria-label={`Pronunciar ${noun.article} ${noun.word} en alemán`}
+                            title="Escuchar en alemán"
+                          >
+                            audio
+                          </button>
+                        </span>
                         <span className="word-translation-mobile">{noun.translation}</span>
                       </td>
                       <td className="col-article">{noun.article}</td>

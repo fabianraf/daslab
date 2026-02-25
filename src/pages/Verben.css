@@ -113,25 +113,36 @@
 
 .verb-item {
   width: 100%;
-  text-align: left;
   border: 1px solid var(--border);
   background: var(--bg);
   color: var(--text);
   border-radius: 10px;
-  padding: 0.65rem 0.75rem;
+  padding: 0.45rem 0.55rem;
   margin-bottom: 0.5rem;
-  cursor: pointer;
-  transition: border-color 0.15s ease, transform 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  transition: border-color 0.15s ease;
 }
 
 .verb-item:hover {
   border-color: var(--accent);
-  transform: translateY(-1px);
 }
 
 .verb-item.active {
   border-color: var(--accent);
   background: rgba(139, 92, 246, 0.16);
+}
+
+.verb-select-btn {
+  flex: 1;
+  text-align: left;
+  border: none;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  padding: 0.2rem;
 }
 
 .verb-item-de {
@@ -191,10 +202,38 @@
   width: 45%;
 }
 
+.verben-table td:nth-child(2) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
 .verben-empty {
   color: var(--text-muted);
   margin: 0;
   padding: 0.5rem;
+}
+
+.verb-speak-btn {
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-muted);
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.45rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.verb-speak-btn:hover,
+.verb-speak-btn:focus {
+  border-color: var(--accent);
+  color: var(--text);
+  outline: none;
 }
 
 .verben-exercise {
@@ -232,6 +271,10 @@
 
 .exercise-prompt span {
   color: var(--text-muted);
+}
+
+.exercise-prompt .verb-speak-btn {
+  margin-left: 0.55rem;
 }
 
 .exercise-options {

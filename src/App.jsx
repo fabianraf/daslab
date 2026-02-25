@@ -69,6 +69,15 @@ function buildDativDeck(baseDeck) {
   })
 }
 
+function speakGerman(text) {
+  if (typeof window === 'undefined' || !window.speechSynthesis) return
+  const utterance = new SpeechSynthesisUtterance(text)
+  utterance.lang = 'de-DE'
+  utterance.rate = 0.9
+  window.speechSynthesis.cancel()
+  window.speechSynthesis.speak(utterance)
+}
+
 export default function App() {
   const [practiceType, setPracticeType] = useState('artikel')
   const [mode, setMode] = useState('all')
@@ -145,7 +154,7 @@ export default function App() {
         </h1>
         <p className="subtitle">Practica los artículos en alemán / Artikel üben</p>
         <nav className="practice-nav" aria-label="Otras secciones">
-          <Link to="/" className="practice-section-link practice-section-link--table">
+          <Link to="/artikel" className="practice-section-link practice-section-link--table">
             ← Tabla / Artikel
           </Link>
           <Link to="/grammatik" className="practice-section-link practice-section-link--grammatik">
@@ -241,10 +250,36 @@ export default function App() {
             <NounIcon name={current.icon} size={56} />
           </div>
           {practiceType === 'artikel' ? (
-            <p className="word">{current.word}</p>
+            <p className="word-row">
+              <span className="word">{current.word}</span>
+              {feedback !== null ? (
+                <button
+                  type="button"
+                  className="speak-btn"
+                  onClick={() => speakGerman(`${current.article} ${current.word}`)}
+                  aria-label={`Pronunciar ${current.article} ${current.word} en alemán`}
+                  title="Escuchar en alemán"
+                >
+                  audio
+                </button>
+              ) : null}
+            </p>
           ) : (
             <>
-              <p className="word dativ-phrase">{currentDativ.phrase}</p>
+              <p className="word-row dativ-row">
+                <span className="word dativ-phrase">{currentDativ.phrase}</span>
+                {feedback !== null ? (
+                  <button
+                    type="button"
+                    className="speak-btn"
+                    onClick={() => speakGerman(currentDativ.solutionPhrase)}
+                    aria-label={`Pronunciar ${currentDativ.solutionPhrase} en alemán`}
+                    title="Escuchar en alemán"
+                  >
+                    audio
+                  </button>
+                ) : null}
+              </p>
               <p className="dativ-pattern">{currentDativ.patternLabel}</p>
             </>
           )}

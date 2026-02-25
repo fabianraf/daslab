@@ -10,6 +10,15 @@ function normalize(text) {
     .replace(/\p{Diacritic}/gu, '')
 }
 
+function speakGerman(text) {
+  if (typeof window === 'undefined' || !window.speechSynthesis) return
+  const utterance = new SpeechSynthesisUtterance(text)
+  utterance.lang = 'de-DE'
+  utterance.rate = 0.9
+  window.speechSynthesis.cancel()
+  window.speechSynthesis.speak(utterance)
+}
+
 const EXERCISE_QUESTIONS = 10
 
 function shuffle(array) {
@@ -103,8 +112,8 @@ export default function Verben() {
     <div className="verben-page">
       <header className="verben-header">
         <nav className="verben-nav" aria-label="Otras secciones">
-          <Link to="/" className="verben-link verben-link--table">← Tabla / Artikel</Link>
-          <Link to="/practicar" className="verben-link verben-link--practice">→ Practicar / Üben</Link>
+          <Link to="/artikel" className="verben-link verben-link--table">← Tabla / Artikel</Link>
+          <Link to="/ueben" className="verben-link verben-link--practice">→ Practicar / Üben</Link>
           <Link to="/grammatik" className="verben-link verben-link--grammatik">Grammatik</Link>
         </nav>
         <h1 className="verben-title">Verbos / Verben</h1>
@@ -138,15 +147,25 @@ export default function Verben() {
             <p className="verben-empty">No hay verbos con ese filtro.</p>
           ) : (
             filtered.map((verb) => (
-              <button
-                key={verb.infinitive}
-                type="button"
-                className={`verb-item ${selectedVerb?.infinitive === verb.infinitive ? 'active' : ''}`}
-                onClick={() => setSelected(verb.infinitive)}
-              >
-                <span className="verb-item-de">{verb.infinitive}</span>
-                <span className="verb-item-es">{verb.translation}</span>
-              </button>
+              <div key={verb.infinitive} className={`verb-item ${selectedVerb?.infinitive === verb.infinitive ? 'active' : ''}`}>
+                <button
+                  type="button"
+                  className="verb-select-btn"
+                  onClick={() => setSelected(verb.infinitive)}
+                >
+                  <span className="verb-item-de">{verb.infinitive}</span>
+                  <span className="verb-item-es">{verb.translation}</span>
+                </button>
+                <button
+                  type="button"
+                  className="verb-speak-btn"
+                  onClick={() => speakGerman(verb.infinitive)}
+                  aria-label={`Pronunciar ${verb.infinitive} en alemán`}
+                  title="Escuchar en alemán"
+                >
+                  audio
+                </button>
+              </div>
             ))
           )}
         </section>
@@ -157,6 +176,15 @@ export default function Verben() {
               <h2 className="verben-detail-title">
                 <span>{selectedVerb.infinitive}</span>
                 <small>{selectedVerb.translation}</small>
+                <button
+                  type="button"
+                  className="verb-speak-btn"
+                  onClick={() => speakGerman(selectedVerb.infinitive)}
+                  aria-label={`Pronunciar ${selectedVerb.infinitive} en alemán`}
+                  title="Escuchar en alemán"
+                >
+                  audio
+                </button>
               </h2>
               <div className="verben-table-wrap">
                 <table className="verben-table">
@@ -170,7 +198,18 @@ export default function Verben() {
                     {PRONOUN_ROWS.map((row) => (
                       <tr key={row.id}>
                         <td>{row.label}</td>
-                        <td>{selectedVerb.conjugation[row.id]}</td>
+                        <td>
+                          <span>{selectedVerb.conjugation[row.id]}</span>
+                          <button
+                            type="button"
+                            className="verb-speak-btn"
+                            onClick={() => speakGerman(`${row.label} ${selectedVerb.conjugation[row.id]}`)}
+                            aria-label={`Pronunciar ${row.label} ${selectedVerb.conjugation[row.id]} en alemán`}
+                            title="Escuchar en alemán"
+                          >
+                            audio
+                          </button>
+                        </td>
                       </tr>
                     ))}
                   </tbody>
@@ -200,6 +239,17 @@ export default function Verben() {
             <p className="exercise-prompt">
               <strong>{currentQuestion.pronoun.label}</strong> + <strong>{currentQuestion.verb.infinitive}</strong>
               <span> ({currentQuestion.verb.translation})</span>
+              {exerciseFeedback ? (
+                <button
+                  type="button"
+                  className="verb-speak-btn"
+                  onClick={() => speakGerman(`${currentQuestion.pronoun.label} ${currentQuestion.correct}`)}
+                  aria-label="Pronunciar la respuesta correcta en alemán"
+                  title="Escuchar en alemán"
+                >
+                  audio
+                </button>
+              ) : null}
             </p>
             <div className="exercise-options">
               {currentQuestion.options.map((option) => {

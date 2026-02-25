@@ -38,6 +38,15 @@
   color: #fff;
 }
 
+.artikkles-section-link--inicio {
+  background: linear-gradient(135deg, #4b5563 0%, #6b7280 100%);
+  color: #fff;
+}
+
+.artikkles-section-link--inicio:hover {
+  color: #fff;
+}
+
 .artikkles-section-link--practicar:hover {
   color: #fff;
 }
@@ -241,6 +250,32 @@
 
 .col-word {
   font-weight: 600;
+}
+
+.word-main-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.speak-btn {
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-muted);
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.45rem;
+  cursor: pointer;
+}
+
+.speak-btn:hover,
+.speak-btn:focus {
+  border-color: var(--accent);
+  color: var(--text);
+  outline: none;
 }
 
 .col-article {

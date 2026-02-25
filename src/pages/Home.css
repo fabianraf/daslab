@@ -1,0 +1,78 @@
+.home-page {
+  min-height: 100vh;
+  padding: 1.5rem;
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.home-header {
+  margin-bottom: 1.25rem;
+}
+
+.home-title {
+  margin: 0 0 0.2rem 0;
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.home-subtitle {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.home-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.home-card {
+  min-height: 150px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  padding: 1rem;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--shadow);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.home-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+}
+
+.home-card-title {
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.home-card-subtitle {
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.9rem;
+}
+
+.home-card--artikel {
+  background: linear-gradient(135deg, #8b5cf6 0%, #c084fc 100%);
+}
+
+.home-card--practice {
+  background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+}
+
+.home-card--grammatik {
+  background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
+}
+
+.home-card--verben {
+  background: linear-gradient(135deg, #10b981 0%, #22c55e 100%);
+}
+
+@media (max-width: 640px) {
+  .home-grid {
+    grid-template-columns: 1fr;
+  }
+}
