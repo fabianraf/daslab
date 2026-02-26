@@ -189,4 +189,24 @@ export const VERBS = [
     translation: 'encontrar',
     conjugation: { ich: 'finde', du: 'findest', erSieEs: 'findet', wir: 'finden', ihr: 'findet', sieSie: 'finden' },
   },
+  {
+    infinitive: 'antworten',
+    translation: 'responder',
+    conjugation: { ich: 'antworte', du: 'antwortest', erSieEs: 'antwortet', wir: 'antworten', ihr: 'antwortet', sieSie: 'antworten' },
+  },
+  {
+    infinitive: 'einkaufen gehen',
+    translation: 'hacer la compra',
+    conjugation: { ich: 'gehe einkaufen', du: 'gehst einkaufen', erSieEs: 'geht einkaufen', wir: 'gehen einkaufen', ihr: 'geht einkaufen', sieSie: 'gehen einkaufen' },
+  },
+  {
+    infinitive: 'brauchen',
+    translation: 'necesitar',
+    conjugation: { ich: 'brauche', du: 'brauchst', erSieEs: 'braucht', wir: 'brauchen', ihr: 'braucht', sieSie: 'brauchen' },
+  },
+  {
+    infinitive: 'möchten',
+    translation: 'querer',
+    conjugation: { ich: 'möchte', du: 'möchtest', erSieEs: 'möchte', wir: 'möchten', ihr: 'möchtet', sieSie: 'möchten' },
+  },
 ]

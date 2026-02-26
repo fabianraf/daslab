@@ -51,6 +51,7 @@ import {
   Salad,
   Fish,
   Circle,
+  Package,
 } from 'lucide-react'
 
 const ICON_MAP = {
@@ -106,6 +107,7 @@ const ICON_MAP = {
   Salad,
   Fish,
   Circle,
+  Package,
 }
 
 export function NounIcon({ name, size = 32, className = '' }) {
