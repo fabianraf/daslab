@@ -529,6 +529,7 @@ export default function App() {
         >
           {showTranslation ? 'Ocultar / ausblenden' : 'Mostrar / zeigen'} Übersetzung
         </button>
+        <p className="made-by-footer">Erstellt von Fabián Aguirre · 2026</p>
       </footer>
     </div>
   )

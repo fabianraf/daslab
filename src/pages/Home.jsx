@@ -44,6 +44,7 @@ export default function Home() {
           </Link>
         ))}
       </main>
+      <p className="made-by-footer">Erstellt von Fabián Aguirre · 2026</p>
     </div>
   )
 }

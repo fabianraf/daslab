@@ -300,6 +300,7 @@ export default function Verben() {
           </div>
         )}
       </section>
+      <p className="made-by-footer">Erstellt von Fabián Aguirre · 2026</p>
     </div>
   )
 }

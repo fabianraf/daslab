@@ -32,3 +32,10 @@ body {
 #root {
   min-height: 100vh;
 }
+
+.made-by-footer {
+  margin: 1.25rem 0 0 0;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
