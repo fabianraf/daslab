@@ -11,7 +11,7 @@ const SECTIONS = [
   {
     to: '/ueben',
     title: 'Practicar / Üben',
-    subtitle: 'Ejercicios de artículos y Dativ',
+    subtitle: 'Juegos separados: artículos, casos y ein/kein',
     className: 'home-card--practice',
   },
   {

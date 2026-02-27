@@ -209,4 +209,54 @@ export const VERBS = [
     translation: 'querer',
     conjugation: { ich: 'möchte', du: 'möchtest', erSieEs: 'möchte', wir: 'möchten', ihr: 'möchtet', sieSie: 'möchten' },
   },
+  {
+    infinitive: 'kosten',
+    translation: 'costar',
+    conjugation: { ich: 'koste', du: 'kostest', erSieEs: 'kostet', wir: 'kosten', ihr: 'kostet', sieSie: 'kosten' },
+  },
+  {
+    infinitive: 'bezahlen',
+    translation: 'pagar',
+    conjugation: { ich: 'bezahle', du: 'bezahlst', erSieEs: 'bezahlt', wir: 'bezahlen', ihr: 'bezahlt', sieSie: 'bezahlen' },
+  },
+  {
+    infinitive: 'bringen',
+    translation: 'traer',
+    conjugation: { ich: 'bringe', du: 'bringst', erSieEs: 'bringt', wir: 'bringen', ihr: 'bringt', sieSie: 'bringen' },
+  },
+  {
+    infinitive: 'schmecken',
+    translation: 'saber / gustar (comida)',
+    conjugation: { ich: 'schmecke', du: 'schmeckst', erSieEs: 'schmeckt', wir: 'schmecken', ihr: 'schmeckt', sieSie: 'schmecken' },
+  },
+  {
+    infinitive: 'backen',
+    translation: 'hornear',
+    conjugation: { ich: 'backe', du: 'bäckst', erSieEs: 'bäckt', wir: 'backen', ihr: 'backt', sieSie: 'backen' },
+  },
+  {
+    infinitive: 'schneiden',
+    translation: 'cortar',
+    conjugation: { ich: 'schneide', du: 'schneidest', erSieEs: 'schneidet', wir: 'schneiden', ihr: 'schneidet', sieSie: 'schneiden' },
+  },
+  {
+    infinitive: 'waschen',
+    translation: 'lavar',
+    conjugation: { ich: 'wasche', du: 'wäschst', erSieEs: 'wäscht', wir: 'waschen', ihr: 'wascht', sieSie: 'waschen' },
+  },
+  {
+    infinitive: 'schälen',
+    translation: 'pelar',
+    conjugation: { ich: 'schäle', du: 'schälst', erSieEs: 'schält', wir: 'schälen', ihr: 'schält', sieSie: 'schälen' },
+  },
+  {
+    infinitive: 'einladen',
+    translation: 'invitar',
+    conjugation: { ich: 'lade ein', du: 'lädst ein', erSieEs: 'lädt ein', wir: 'laden ein', ihr: 'ladet ein', sieSie: 'laden ein' },
+  },
+  {
+    infinitive: 'probieren',
+    translation: 'probar',
+    conjugation: { ich: 'probiere', du: 'probierst', erSieEs: 'probiert', wir: 'probieren', ihr: 'probiert', sieSie: 'probieren' },
+  },
 ]

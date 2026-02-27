@@ -4,37 +4,45 @@ import { CATEGORIES, NOUNS, getCategory } from './data/nouns'
 import { NounIcon } from './components/NounIcon'
 import './App.css'
 
-const ARTICLES = [
-  { id: 'der', label: 'der', color: 'var(--der)' },
-  { id: 'die', label: 'die', color: 'var(--die)' },
-  { id: 'das', label: 'das', color: 'var(--das)' },
+const GAME_TYPES = [
+  {
+    id: 'artikel',
+    label: 'Artículos (Nominativ)',
+    description: 'Solo der / die / das en singular.',
+  },
+  {
+    id: 'cases',
+    label: 'Casos (Nom / Akk / Dat)',
+    description: 'Practica el artículo correcto por caso gramatical.',
+  },
+  {
+    id: 'kein',
+    label: 'ein / eine / kein / keine / -',
+    description: 'Nominativ y Akkusativ con indefinido, negación y sin artículo.',
+  },
 ]
 
-const PRACTICE_TYPES = [
-  { id: 'artikel', label: 'Artículos (der / die / das)' },
-  { id: 'dativ', label: 'Dativ (dem/der + ein/kein)' },
-]
+const CASES = ['Nominativ', 'Akkusativ', 'Dativ']
 
-const DATIV_PATTERNS = [
-  {
-    id: 'definite',
-    label: 'Definido: der/die/das',
-    options: ['dem', 'der'],
-    getExpected: (article) => (article === 'die' ? 'der' : 'dem'),
-  },
-  {
-    id: 'indefinite',
-    label: 'Indefinido: ein/eine',
-    options: ['einem', 'einer'],
-    getExpected: (article) => (article === 'die' ? 'einer' : 'einem'),
-  },
-  {
-    id: 'negative',
-    label: 'Negación: kein/keine',
-    options: ['keinem', 'keiner'],
-    getExpected: (article) => (article === 'die' ? 'keiner' : 'keinem'),
-  },
-]
+const CASE_ARTICLE_BY_GENDER = {
+  der: { Nominativ: 'der', Akkusativ: 'den', Dativ: 'dem' },
+  die: { Nominativ: 'die', Akkusativ: 'die', Dativ: 'der' },
+  das: { Nominativ: 'das', Akkusativ: 'das', Dativ: 'dem' },
+}
+
+const EIN_FORMS = {
+  der: { Nominativ: 'ein', Akkusativ: 'einen' },
+  die: { Nominativ: 'eine', Akkusativ: 'eine' },
+  das: { Nominativ: 'ein', Akkusativ: 'ein' },
+}
+
+const KEIN_FORMS = {
+  der: { Nominativ: 'kein', Akkusativ: 'keinen' },
+  die: { Nominativ: 'keine', Akkusativ: 'keine' },
+  das: { Nominativ: 'kein', Akkusativ: 'kein' },
+}
+
+const NO_ARTICLE = '__none__'
 
 function shuffle(array) {
   const arr = [...array]
@@ -53,20 +61,147 @@ function buildDeck(mode, categoryId) {
   return shuffle(categoryNouns).slice(0, Math.min(20, categoryNouns.length))
 }
 
-function buildDativDeck(baseDeck) {
+function buildCasesDeck(baseDeck) {
   return baseDeck.map((noun) => {
-    const pattern = DATIV_PATTERNS[Math.floor(Math.random() * DATIV_PATTERNS.length)]
-    const expected = pattern.getExpected(noun.article)
+    const selectedCase = CASES[Math.floor(Math.random() * CASES.length)]
+    const expected = CASE_ARTICLE_BY_GENDER[noun.article][selectedCase]
+    const optionsByGender = {
+      der: ['der', 'den', 'dem'],
+      die: ['die', 'der', 'dem'],
+      das: ['das', 'dem', 'den'],
+    }
+
     return {
       noun,
-      patternId: pattern.id,
-      patternLabel: pattern.label,
-      options: pattern.options,
+      selectedCase,
+      options: optionsByGender[noun.article],
       expected,
-      phrase: `mit ___ ${noun.word}`,
-      solutionPhrase: `mit ${expected} ${noun.word}`,
+      phrase: `___ ${noun.word}`,
+      solutionPhrase: `${expected} ${noun.word}`,
     }
   })
+}
+
+function buildKeinDeck(baseDeck) {
+  const noPlural = baseDeck.filter((n) => n.plural === '—')
+  const withPlural = baseDeck.filter((n) => n.plural && n.plural !== '—')
+  const countableSingular = withPlural
+  const cases = ['Nominativ', 'Akkusativ']
+
+  function pickOptions(expected) {
+    const all = ['ein', 'eine', 'einen', 'kein', 'keine', 'keinen', NO_ARTICLE]
+    const distractors = shuffle(all.filter((item) => item !== expected)).slice(0, 3)
+    return shuffle([expected, ...distractors])
+  }
+
+  return baseDeck.map((_, index) => {
+    const selectedCase = cases[Math.floor(Math.random() * cases.length)]
+    const kind = index % 5
+
+    // Nominativ singular positivo: Das ist ein/eine...
+    if (kind === 0 && countableSingular.length > 0) {
+      const noun = countableSingular[Math.floor(Math.random() * countableSingular.length)]
+      const expected = EIN_FORMS[noun.article].Nominativ
+      return {
+        noun,
+        patternLabel: 'Nominativ / Singular',
+        expected,
+        options: pickOptions(expected),
+        phrase: `Das ist ___ ${noun.word}.`,
+        solutionPhrase: `Das ist ${expected} ${noun.word}.`,
+      }
+    }
+
+    // Akkusativ singular positivo: Ich kaufe einen/eine/ein...
+    if (kind === 1 && countableSingular.length > 0) {
+      const noun = countableSingular[Math.floor(Math.random() * countableSingular.length)]
+      const expected = EIN_FORMS[noun.article].Akkusativ
+      return {
+        noun,
+        patternLabel: 'Akkusativ / Singular',
+        expected,
+        options: pickOptions(expected),
+        phrase: `Ich kaufe ___ ${noun.word}.`,
+        solutionPhrase: `Ich kaufe ${expected} ${noun.word}.`,
+      }
+    }
+
+    // Akkusativ singular negativo: Ich kaufe keinen/keine/kein...
+    if (kind === 2 && countableSingular.length > 0) {
+      const noun = countableSingular[Math.floor(Math.random() * countableSingular.length)]
+      const expected = KEIN_FORMS[noun.article].Akkusativ
+      return {
+        noun,
+        patternLabel: 'Akkusativ / Negación singular',
+        expected,
+        options: pickOptions(expected),
+        phrase: `Ich kaufe ___ ${noun.word}.`,
+        solutionPhrase: `Ich kaufe ${expected} ${noun.word}.`,
+      }
+    }
+
+    // Plural: sin artículo o "keine"
+    if (kind === 3 && withPlural.length > 0) {
+      const pluralNoun = withPlural[Math.floor(Math.random() * withPlural.length)]
+      const isNegative = Math.random() > 0.5
+      const expected = isNegative ? 'keine' : NO_ARTICLE
+      return {
+        noun: pluralNoun,
+        patternLabel: 'Plural',
+        expected,
+        options: pickOptions(expected),
+        phrase: `Ich kaufe ___ ${pluralNoun.plural}.`,
+        solutionPhrase: isNegative
+          ? `Ich kaufe keine ${pluralNoun.plural}.`
+          : `Ich kaufe ${pluralNoun.plural}.`,
+      }
+    }
+
+    // Nombres incontables: normalmente sin artículo o "kein/keine"
+    if (noPlural.length > 0) {
+      const bareNoun = noPlural[Math.floor(Math.random() * noPlural.length)]
+      const isNegative = Math.random() > 0.5
+      const expected = isNegative ? KEIN_FORMS[bareNoun.article].Akkusativ : NO_ARTICLE
+      return {
+        noun: bareNoun,
+        patternLabel: 'Akkusativ / Incontable',
+        expected,
+        options: pickOptions(expected),
+        phrase: `Ich brauche ___ ${bareNoun.word}.`,
+        solutionPhrase: isNegative
+          ? `Ich brauche ${expected} ${bareNoun.word}.`
+          : `Ich brauche ${bareNoun.word}.`,
+      }
+    }
+
+    // Fallback (si no hubiera incontables): singular positivo/negativo
+    const noun = countableSingular[Math.floor(Math.random() * countableSingular.length)]
+    const isNegative = Math.random() > 0.5
+    const expected = isNegative
+      ? KEIN_FORMS[noun.article][selectedCase]
+      : EIN_FORMS[noun.article][selectedCase]
+
+    const phrase = selectedCase === 'Nominativ'
+      ? `Das ist ___ ${noun.word}.`
+      : `Ich kaufe ___ ${noun.word}.`
+
+    const solutionPhrase = selectedCase === 'Nominativ'
+      ? `Das ist ${expected} ${noun.word}.`
+      : `Ich kaufe ${expected} ${noun.word}.`
+
+    return {
+      noun,
+      patternLabel: `${selectedCase} / Singular`,
+      expected,
+      options: pickOptions(expected),
+      phrase,
+      solutionPhrase,
+    }
+  })
+}
+
+function determinerLabel(value) {
+  return value === NO_ARTICLE ? '-' : value
 }
 
 function speakGerman(text) {
@@ -79,7 +214,7 @@ function speakGerman(text) {
 }
 
 export default function App() {
-  const [practiceType, setPracticeType] = useState('artikel')
+  const [gameType, setGameType] = useState('artikel')
   const [mode, setMode] = useState('all')
   const [categoryId, setCategoryId] = useState('lugares')
   const [deck, setDeck] = useState(() => buildDeck('all', 'lugares'))
@@ -89,7 +224,8 @@ export default function App() {
   const [selectedAnswer, setSelectedAnswer] = useState(null)
   const [showTranslation, setShowTranslation] = useState(false)
 
-  const dativQuestions = useMemo(() => buildDativDeck(deck), [deck])
+  const casesQuestions = useMemo(() => buildCasesDeck(deck), [deck])
+  const keinQuestions = useMemo(() => buildKeinDeck(deck), [deck])
 
   useEffect(() => {
     setDeck(buildDeck(mode, categoryId))
@@ -106,16 +242,26 @@ export default function App() {
     setFeedback(null)
     setSelectedAnswer(null)
     setShowTranslation(false)
-  }, [practiceType])
+  }, [gameType])
 
   const current = deck[currentIndex]
-  const currentDativ = dativQuestions[currentIndex]
+  const currentCase = casesQuestions[currentIndex]
+  const currentKein = keinQuestions[currentIndex]
+  const activeNoun = gameType === 'kein'
+    ? currentKein?.noun || current
+    : gameType === 'cases'
+      ? currentCase?.noun || current
+      : current
   const isLast = currentIndex >= deck.length - 1
   const progress = deck.length ? ((currentIndex + 1) / deck.length) * 100 : 0
 
   const handleAnswer = (answer) => {
     if (feedback !== null) return
-    const expected = practiceType === 'artikel' ? current.article : currentDativ.expected
+    const expected = gameType === 'artikel'
+      ? current.article
+      : gameType === 'cases'
+        ? currentCase.expected
+        : currentKein.expected
     const correct = answer === expected
     setSelectedAnswer(answer)
     setScore((s) => ({ correct: s.correct + (correct ? 1 : 0), total: s.total + 1 }))
@@ -169,19 +315,22 @@ export default function App() {
         </nav>
 
         <div className="mode-panel">
-          <p className="mode-label">Entrenamiento</p>
+          <p className="mode-label">Juegos</p>
           <div className="practice-type-buttons" role="group" aria-label="Tipo de entrenamiento">
-            {PRACTICE_TYPES.map((t) => (
+            {GAME_TYPES.map((t) => (
               <button
                 key={t.id}
                 type="button"
-                className={`mode-btn ${practiceType === t.id ? 'active' : ''}`}
-                onClick={() => setPracticeType(t.id)}
+                className={`mode-btn ${gameType === t.id ? 'active' : ''}`}
+                onClick={() => setGameType(t.id)}
               >
                 {t.label}
               </button>
             ))}
           </div>
+          <p className="game-description">
+            {GAME_TYPES.find((g) => g.id === gameType)?.description}
+          </p>
 
           <p className="mode-label">Modo de práctica</p>
           <div className="mode-buttons" role="group" aria-label="Modo de práctica">
@@ -245,14 +394,16 @@ export default function App() {
       <main className="practice">
         <div className="word-card">
           <p className="word-label">
-            {practiceType === 'artikel'
+            {gameType === 'artikel'
               ? '¿Qué artículo lleva? / Welcher Artikel?'
-              : 'Completa en Dativ / Ergänze im Dativ'}
+              : gameType === 'cases'
+                ? 'Completa según el caso / Ergänze nach Fall'
+                : 'ein / eine / kein / keine / -'}
           </p>
           <div className="word-card-icon">
-            <NounIcon name={current.icon} size={56} />
+            <NounIcon name={activeNoun.icon} size={56} />
           </div>
-          {practiceType === 'artikel' ? (
+          {gameType === 'artikel' ? (
             <p className="word-row">
               <span className="word">{current.word}</span>
               {feedback !== null ? (
@@ -267,35 +418,63 @@ export default function App() {
                 </button>
               ) : null}
             </p>
-          ) : (
+          ) : gameType === 'cases' ? (
             <>
               <p className="word-row dativ-row">
-                <span className="word dativ-phrase">{currentDativ.phrase}</span>
+                <span className="word dativ-phrase">{currentCase.phrase}</span>
                 {feedback !== null ? (
                   <button
                     type="button"
                     className="speak-btn"
-                    onClick={() => speakGerman(currentDativ.solutionPhrase)}
-                    aria-label={`Pronunciar ${currentDativ.solutionPhrase} en alemán`}
+                    onClick={() => speakGerman(currentCase.solutionPhrase)}
+                    aria-label={`Pronunciar ${currentCase.solutionPhrase} en alemán`}
                     title="Escuchar en alemán"
                   >
                     audio
                   </button>
                 ) : null}
               </p>
-              <p className="dativ-pattern">{currentDativ.patternLabel}</p>
+              <p className="dativ-pattern">{currentCase.selectedCase}</p>
+            </>
+          ) : (
+            <>
+              <p className="word-row dativ-row">
+                <span className="word dativ-phrase">{currentKein.phrase}</span>
+                {feedback !== null ? (
+                  <button
+                    type="button"
+                    className="speak-btn"
+                    onClick={() => speakGerman(currentKein.solutionPhrase)}
+                    aria-label={`Pronunciar ${currentKein.solutionPhrase} en alemán`}
+                    title="Escuchar en alemán"
+                  >
+                    audio
+                  </button>
+                ) : null}
+              </p>
+              <p className="dativ-pattern">{currentKein.patternLabel}</p>
             </>
           )}
           {showTranslation && (
-            <p className="translation">{current.translation}</p>
+            <p className="translation">{activeNoun.translation}</p>
           )}
         </div>
 
         <div className="articles">
-          {(practiceType === 'artikel'
-            ? ARTICLES.map(({ id, label, color }) => ({ id, label, color }))
-            : currentDativ.options.map((opt) => ({ id: opt, label: opt, color: 'var(--accent)' }))).map(({ id, label, color }) => {
-              const expected = practiceType === 'artikel' ? current.article : currentDativ.expected
+          {(gameType === 'artikel'
+            ? [
+              { id: 'der', label: 'der', color: 'var(--der)' },
+              { id: 'die', label: 'die', color: 'var(--die)' },
+              { id: 'das', label: 'das', color: 'var(--das)' },
+            ]
+            : gameType === 'cases'
+              ? currentCase.options.map((opt) => ({ id: opt, label: opt, color: 'var(--accent)' }))
+              : currentKein.options.map((opt) => ({ id: opt, label: opt, color: 'var(--accent)' }))).map(({ id, label, color }) => {
+              const expected = gameType === 'artikel'
+                ? current.article
+                : gameType === 'cases'
+                  ? currentCase.expected
+                  : currentKein.expected
               const isSelectedWrong = feedback === 'wrong' && selectedAnswer === id && id !== expected
               const isExpected = id === expected
 
@@ -312,7 +491,7 @@ export default function App() {
                   onClick={() => handleAnswer(id)}
                   disabled={feedback !== null}
                 >
-                  {label}
+                  {determinerLabel(label)}
                 </button>
               )
             })}
@@ -324,14 +503,15 @@ export default function App() {
               <p>✓ Correcto / Richtig</p>
             ) : (
               <p>
-                Lo correcto es / Richtig ist{' '}
-                <strong>{practiceType === 'artikel' ? current.article : currentDativ.expected}</strong>{' '}
-                {current.word}
-                {practiceType === 'dativ' ? (
+                {gameType === 'artikel' ? (
                   <>
-                    {' '}→ <strong>{currentDativ.solutionPhrase}</strong>
+                    Lo correcto es / Richtig ist <strong>{current.article}</strong> {activeNoun.word}
                   </>
-                ) : null}
+                ) : (
+                  <>
+                    Lo correcto es / Richtig ist → <strong>{gameType === 'cases' ? currentCase.solutionPhrase : currentKein.solutionPhrase}</strong>
+                  </>
+                )}
               </p>
             )}
             <button type="button" className="next-btn" onClick={nextWord}>

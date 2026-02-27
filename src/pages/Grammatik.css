@@ -76,6 +76,7 @@
   box-shadow: var(--shadow);
 }
 
+.section-guide { border-top: 3px solid var(--accent); }
 .section-akk { border-top: 3px solid #3b82f6; }
 .section-dat { border-top: 3px solid #f59e0b; }
 .section-imp { border-top: 3px solid #10b981; }
@@ -90,6 +91,48 @@
 .section-akk .section-heading { color: #3b82f6; }
 .section-dat .section-heading { color: #f59e0b; }
 .section-imp .section-heading { color: #10b981; }
+.section-guide .section-heading { color: var(--accent); }
+
+.case-guide-intro {
+  margin: 0 0 1rem 0;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+.case-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 740px) {
+  .case-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+.case-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.01);
+}
+
+.case-card h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.case-card p {
+  margin: 0.25rem 0;
+  font-size: 0.92rem;
+}
+
+.case-example {
+  color: var(--text-muted);
+}
 
 .section-hint {
   font-family: 'DM Sans', system-ui, sans-serif;

@@ -60,6 +60,27 @@ const IMPERATIV_EXAMPLES = [
   { infinitiv: 'haben', du: 'Hab(e)!', ihr: 'Habt!', Sie: 'Haben Sie!' },
 ]
 
+const CASE_GUIDE = [
+  {
+    fall: 'Nominativ',
+    question: 'Wer? / Was?',
+    use: 'sujeto (quién hace la acción)',
+    example: 'Der Mann kauft Brot.',
+  },
+  {
+    fall: 'Akkusativ',
+    question: 'Wen? / Was?',
+    use: 'objeto directo (qué recibe la acción)',
+    example: 'Der Mann kauft den Kuchen.',
+  },
+  {
+    fall: 'Dativ',
+    question: 'Wem?',
+    use: 'objeto indirecto (a quién / para quién)',
+    example: 'Der Mann gibt dem Kind ein Brot.',
+  },
+]
+
 export default function Grammatik() {
   return (
     <div className="grammatik-page">
@@ -75,6 +96,62 @@ export default function Grammatik() {
       </header>
 
       <div className="grammatik-sections">
+        <section className="grammatik-section section-guide">
+          <h2 className="section-heading">Fälle schnell erkennen / Reconocer casos rápido</h2>
+          <p className="case-guide-intro">
+            Piensa en esta secuencia: <strong>1) verbo</strong>, <strong>2) quién hace la acción</strong> (Nominativ),
+            <strong> 3) qué cosa/persona recibe directamente la acción</strong> (Akkusativ),
+            <strong> 4) a quién va dirigida</strong> (Dativ).
+          </p>
+          <div className="case-cards">
+            {CASE_GUIDE.map((row) => (
+              <article key={row.fall} className="case-card">
+                <h3>{row.fall}</h3>
+                <p><strong>Pregunta:</strong> {row.question}</p>
+                <p><strong>Uso:</strong> {row.use}</p>
+                <p className="case-example"><strong>Ejemplo:</strong> {row.example}</p>
+              </article>
+            ))}
+          </div>
+          <div className="table-block">
+            <h3>Señal rápida con artículos / Schnelle Artikel-Signale</h3>
+            <table className="gramm-table">
+              <thead>
+                <tr>
+                  <th>Fall</th>
+                  <th>masc.</th>
+                  <th>fem.</th>
+                  <th>neut.</th>
+                  <th>plural</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Nominativ</td>
+                  <td className="highlight">der</td>
+                  <td className="highlight">die</td>
+                  <td className="highlight">das</td>
+                  <td className="highlight">die</td>
+                </tr>
+                <tr>
+                  <td>Akkusativ</td>
+                  <td className="highlight">den</td>
+                  <td className="highlight">die</td>
+                  <td className="highlight">das</td>
+                  <td className="highlight">die</td>
+                </tr>
+                <tr>
+                  <td>Dativ</td>
+                  <td className="highlight">dem</td>
+                  <td className="highlight">der</td>
+                  <td className="highlight">dem</td>
+                  <td className="highlight">den (+n)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
         {/* Akkusativ */}
         <section className="grammatik-section section-akk">
           <h2 className="section-heading">Akkusativ <span className="section-hint">(wen? was? — objeto directo / Akkusativobjekt)</span></h2>
