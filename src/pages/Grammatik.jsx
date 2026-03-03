@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { PageNav } from '../components/PageNav'
 import './Grammatik.css'
 
 const AKKUSATIV_ARTICLES = [
@@ -51,6 +52,26 @@ const DATIV_PRONOUNS = [
   { nom: 'Sie', dat: 'Ihnen' },
 ]
 
+// Possessivartikel "mein" (mi / my) — mismas terminaciones que ein/eine + kein/keine
+const POSSESSIV_MEIN_NOM = [
+  { genre: 'masc.', form: 'mein', example: 'mein Bruder' },
+  { genre: 'fem.', form: 'meine', example: 'meine Schwester' },
+  { genre: 'neut.', form: 'mein', example: 'mein Kind' },
+  { genre: 'plural', form: 'meine', example: 'meine Eltern' },
+]
+const POSSESSIV_MEIN_AKK = [
+  { genre: 'masc.', form: 'meinen', example: 'ich sehe meinen Bruder' },
+  { genre: 'fem.', form: 'meine', example: 'ich sehe meine Schwester' },
+  { genre: 'neut.', form: 'mein', example: 'ich sehe mein Kind' },
+  { genre: 'plural', form: 'meine', example: 'ich sehe meine Eltern' },
+]
+const POSSESSIV_MEIN_DAT = [
+  { genre: 'masc.', form: 'meinem', example: 'mit meinem Bruder' },
+  { genre: 'fem.', form: 'meiner', example: 'mit meiner Schwester' },
+  { genre: 'neut.', form: 'meinem', example: 'mit meinem Kind' },
+  { genre: 'plural', form: 'meinen', example: 'mit meinen Eltern' },
+]
+
 const IMPERATIV_EXAMPLES = [
   { infinitiv: 'kommen', du: 'Komm(e)!', ihr: 'Kommt!', Sie: 'Kommen Sie!' },
   { infinitiv: 'sprechen', du: 'Sprich!', ihr: 'Sprecht!', Sie: 'Sprechen Sie!' },
@@ -85,14 +106,9 @@ export default function Grammatik() {
   return (
     <div className="grammatik-page">
       <header className="grammatik-header">
-        <nav className="grammatik-nav" aria-label="Otras secciones">
-          <Link to="/" className="grammatik-section-link grammatik-section-link--inicio">← Inicio / Start</Link>
-          <Link to="/artikel" className="grammatik-section-link grammatik-section-link--table">Artículos / Artikel</Link>
-          <Link to="/ueben" className="grammatik-section-link grammatik-section-link--practice">→ Practicar / Üben</Link>
-          <Link to="/verben" className="grammatik-section-link grammatik-section-link--verben">Verbos / Verben</Link>
-        </nav>
+        <PageNav />
         <h1 className="grammatik-title">Grammatik</h1>
-        <p className="grammatik-subtitle">Akkusativ, Dativ, Imperativ</p>
+        <p className="grammatik-subtitle">Akkusativ, Dativ, Possessivartikel (mein), Imperativ</p>
       </header>
 
       <div className="grammatik-sections">
@@ -286,6 +302,82 @@ export default function Grammatik() {
               </tbody>
             </table>
           </div>
+        </section>
+
+        {/* Possessivartikel mein */}
+        <section className="grammatik-section section-possessiv">
+          <h2 className="section-heading">Possessivartikel: mein, meine <span className="section-hint">(mi / mis — my)</span></h2>
+          <p className="possessiv-intro">
+            Los posesivos (mein, dein, sein, ihr, unser, euer) llevan las <strong>mismas terminaciones</strong> que <em>ein/eine</em> y <em>kein/keine</em> según el caso y el género. Aquí solo <strong>mein</strong> como referencia.
+          </p>
+          <div className="tables-row tables-row--three">
+            <div className="table-block">
+              <h3>Nominativ (sujeto)</h3>
+              <table className="gramm-table">
+                <thead>
+                  <tr>
+                    <th>Género</th>
+                    <th>Forma</th>
+                    <th>Ejemplo</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {POSSESSIV_MEIN_NOM.map((row, i) => (
+                    <tr key={i}>
+                      <td className="muted">{row.genre}</td>
+                      <td className="highlight">{row.form}</td>
+                      <td>{row.example}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div className="table-block">
+              <h3>Akkusativ (objeto directo)</h3>
+              <table className="gramm-table">
+                <thead>
+                  <tr>
+                    <th>Género</th>
+                    <th>Forma</th>
+                    <th>Ejemplo</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {POSSESSIV_MEIN_AKK.map((row, i) => (
+                    <tr key={i}>
+                      <td className="muted">{row.genre}</td>
+                      <td className="highlight">{row.form}</td>
+                      <td>{row.example}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div className="table-block">
+              <h3>Dativ (objeto indirecto / con preposición)</h3>
+              <table className="gramm-table">
+                <thead>
+                  <tr>
+                    <th>Género</th>
+                    <th>Forma</th>
+                    <th>Ejemplo</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {POSSESSIV_MEIN_DAT.map((row, i) => (
+                    <tr key={i}>
+                      <td className="muted">{row.genre}</td>
+                      <td className="highlight">{row.form}</td>
+                      <td>{row.example}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <p className="possessiv-note">
+            <strong>Resumen:</strong> Nominativ → mein, meine, mein, meine. Akkusativ → meinen, meine, mein, meine (solo cambia masculino: mein → meinen). Dativ → meinem, meiner, meinem, meinen (terminaciones como <em>einem, einer, einem, –</em> + n en plural).
+          </p>
         </section>
 
         {/* Imperativ */}

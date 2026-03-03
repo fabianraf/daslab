@@ -67,6 +67,10 @@
   background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
 }
 
+.home-card--modalverben {
+  background: linear-gradient(135deg, #06b6d4 0%, #0ea5e9 100%);
+}
+
 .home-card--verben {
   background: linear-gradient(135deg, #10b981 0%, #22c55e 100%);
 }

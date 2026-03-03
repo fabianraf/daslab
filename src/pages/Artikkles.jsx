@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { NOUNS, CATEGORIES, getCategory } from '../data/nouns'
 import { NounIcon } from '../components/NounIcon'
+import { PageNav } from '../components/PageNav'
 import './Artikkles.css'
 
 const LABELS = {
@@ -49,12 +50,7 @@ export default function Artikkles() {
   return (
     <div className="artikkles-page">
       <header className="artikkles-header">
-        <nav className="artikkles-nav" aria-label="Otras secciones">
-          <Link to="/" className="artikkles-section-link artikkles-section-link--inicio">← Inicio / Start</Link>
-          <Link to="/ueben" className="artikkles-section-link artikkles-section-link--practicar">→ Practicar / Üben</Link>
-          <Link to="/grammatik" className="artikkles-section-link artikkles-section-link--grammatik">Grammatik (Akkusativ, Dativ, Imperativ)</Link>
-          <Link to="/verben" className="artikkles-section-link artikkles-section-link--verben">Verbos / Verben</Link>
-        </nav>
+        <PageNav />
         <h1 className="artikkles-title">Artículos / Artikel</h1>
         <p className="artikkles-subtitle">Lista completa por tipo / Vollständige Liste (der / die / das)</p>
         <div className="artikkles-search">

@@ -1,0 +1,193 @@
+.modalverben-page {
+  min-height: 100vh;
+  padding: 1.5rem;
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.modalverben-header {
+  margin-bottom: 2rem;
+}
+
+.modalverben-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.modalverben-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: #fff;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.modalverben-link:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  color: #fff;
+}
+
+.modalverben-link--inicio {
+  background: linear-gradient(135deg, #4b5563 0%, #6b7280 100%);
+}
+
+.modalverben-link--grammatik {
+  background: linear-gradient(135deg, var(--accent) 0%, #c084fc 100%);
+}
+
+.modalverben-link--verben {
+  background: linear-gradient(135deg, #10b981 0%, #22c55e 100%);
+}
+
+.modalverben-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem 0;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.modalverben-subtitle {
+  color: var(--text-muted);
+  font-size: 1rem;
+  margin: 0;
+}
+
+.modalverben-structure {
+  margin: 1rem 0 0 0;
+  padding: 0.6rem 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.modalverben-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.modalverben-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+.modalverben-intro {
+  border-top: 3px solid #0ea5e9;
+}
+
+.modalverben-intro p {
+  margin: 0 0 0.75rem 0;
+  line-height: 1.55;
+  color: var(--text);
+}
+
+.modalverben-intro p:last-of-type {
+  margin-bottom: 0;
+}
+
+.modalverben-example {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.95rem;
+  padding: 0.75rem 1rem;
+  background: var(--bg);
+  border-radius: var(--radius);
+  border-left: 3px solid #0ea5e9;
+}
+
+.modalverben-example strong {
+  font-family: 'DM Sans', system-ui, sans-serif;
+  margin-right: 0.25rem;
+}
+
+.modalverben-heading {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+  color: var(--text);
+}
+
+.modalverben-tables {
+  border-top: 3px solid #10b981;
+}
+
+.modalverben-tables .modalverben-heading {
+  color: #10b981;
+}
+
+.modalverben-table-block {
+  margin-bottom: 1.5rem;
+}
+
+.modalverben-table-block:last-child {
+  margin-bottom: 0;
+}
+
+.modalverben-verb-title {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.modalverben-infinitive {
+  font-family: 'JetBrains Mono', monospace;
+  color: #10b981;
+}
+
+.modalverben-translation {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.modalverben-table {
+  width: 100%;
+  max-width: 320px;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.modalverben-table th,
+.modalverben-table td {
+  padding: 0.4rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.modalverben-table th {
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+.modalverben-pronoun {
+  color: var(--text-muted);
+}
+
+.modalverben-form {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.modalverben-footer {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}

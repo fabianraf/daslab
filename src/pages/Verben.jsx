@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { PRONOUN_ROWS, VERBS } from '../data/verbs'
+import { PageNav } from '../components/PageNav'
 import './Verben.css'
 
 function normalize(text) {
@@ -111,12 +112,7 @@ export default function Verben() {
   return (
     <div className="verben-page">
       <header className="verben-header">
-        <nav className="verben-nav" aria-label="Otras secciones">
-          <Link to="/" className="verben-link verben-link--inicio">← Inicio / Start</Link>
-          <Link to="/artikel" className="verben-link verben-link--table">Artículos / Artikel</Link>
-          <Link to="/ueben" className="verben-link verben-link--practice">→ Practicar / Üben</Link>
-          <Link to="/grammatik" className="verben-link verben-link--grammatik">Grammatik</Link>
-        </nav>
+        <PageNav />
         <h1 className="verben-title">Verbos / Verben</h1>
         <p className="verben-subtitle">Haz click en un verbo para ver la conjugación en presente (Präsens).</p>
       </header>

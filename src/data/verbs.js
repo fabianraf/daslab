@@ -259,4 +259,150 @@ export const VERBS = [
     translation: 'probar',
     conjugation: { ich: 'probiere', du: 'probierst', erSieEs: 'probiert', wir: 'probieren', ihr: 'probiert', sieSie: 'probieren' },
   },
+  // Del libro: citas, familia, rutinas, compras, cortesía
+  {
+    infinitive: 'treffen',
+    translation: 'encontrar(se) / quedar',
+    conjugation: { ich: 'treffe', du: 'triffst', erSieEs: 'trifft', wir: 'treffen', ihr: 'trefft', sieSie: 'treffen' },
+  },
+  {
+    infinitive: 'besuchen',
+    translation: 'visitar',
+    conjugation: { ich: 'besuche', du: 'besuchst', erSieEs: 'besucht', wir: 'besuchen', ihr: 'besucht', sieSie: 'besuchen' },
+  },
+  {
+    infinitive: 'frühstücken',
+    translation: 'desayunar',
+    conjugation: { ich: 'frühstücke', du: 'frühstückst', erSieEs: 'frühstückt', wir: 'frühstücken', ihr: 'frühstückt', sieSie: 'frühstücken' },
+  },
+  {
+    infinitive: 'verstehen',
+    translation: 'entender',
+    conjugation: { ich: 'verstehe', du: 'verstehst', erSieEs: 'versteht', wir: 'verstehen', ihr: 'versteht', sieSie: 'verstehen' },
+  },
+  {
+    infinitive: 'sagen',
+    translation: 'decir',
+    conjugation: { ich: 'sage', du: 'sagst', erSieEs: 'sagt', wir: 'sagen', ihr: 'sagt', sieSie: 'sagen' },
+  },
+  {
+    infinitive: 'warten',
+    translation: 'esperar',
+    conjugation: { ich: 'warte', du: 'wartest', erSieEs: 'wartet', wir: 'warten', ihr: 'wartet', sieSie: 'warten' },
+  },
+  {
+    infinitive: 'wechseln',
+    translation: 'cambiar / cambiar (dinero)',
+    conjugation: { ich: 'wechsle', du: 'wechselst', erSieEs: 'wechselt', wir: 'wechseln', ihr: 'wechselt', sieSie: 'wechseln' },
+  },
+  {
+    infinitive: 'nennen',
+    translation: 'nombrar / llamar',
+    conjugation: { ich: 'nenne', du: 'nennst', erSieEs: 'nennt', wir: 'nennen', ihr: 'nennt', sieSie: 'nennen' },
+  },
+  {
+    infinitive: 'vereinbaren',
+    translation: 'acordar / concertar (cita)',
+    conjugation: { ich: 'vereinbare', du: 'vereinbarst', erSieEs: 'vereinbart', wir: 'vereinbaren', ihr: 'vereinbart', sieSie: 'vereinbaren' },
+  },
+  {
+    infinitive: 'entschuldigen',
+    translation: 'disculparse',
+    conjugation: { ich: 'entschuldige', du: 'entschuldigst', erSieEs: 'entschuldigt', wir: 'entschuldigen', ihr: 'entschuldigt', sieSie: 'entschuldigen' },
+  },
+  {
+    infinitive: 'ordnen',
+    translation: 'ordenar / asignar',
+    conjugation: { ich: 'ordne', du: 'ordnest', erSieEs: 'ordnet', wir: 'ordnen', ihr: 'ordnet', sieSie: 'ordnen' },
+  },
+  {
+    infinitive: 'duschen',
+    translation: 'ducharse',
+    conjugation: { ich: 'dusche', du: 'duschst', erSieEs: 'duscht', wir: 'duschen', ihr: 'duscht', sieSie: 'duschen' },
+  },
+  {
+    infinitive: 'markieren',
+    translation: 'marcar / destacar',
+    conjugation: { ich: 'markiere', du: 'markierst', erSieEs: 'markiert', wir: 'markieren', ihr: 'markiert', sieSie: 'markieren' },
+  },
+  {
+    infinitive: 'vergleichen',
+    translation: 'comparar',
+    conjugation: { ich: 'vergleiche', du: 'vergleichst', erSieEs: 'vergleicht', wir: 'vergleichen', ihr: 'vergleicht', sieSie: 'vergleichen' },
+  },
+  {
+    infinitive: 'notieren',
+    translation: 'anotar',
+    conjugation: { ich: 'notiere', du: 'notierst', erSieEs: 'notiert', wir: 'notieren', ihr: 'notiert', sieSie: 'notieren' },
+  },
+  {
+    infinitive: 'erzählen',
+    translation: 'contar / narrar',
+    conjugation: { ich: 'erzähle', du: 'erzählst', erSieEs: 'erzählt', wir: 'erzählen', ihr: 'erzählt', sieSie: 'erzählen' },
+  },
+  {
+    infinitive: 'raten',
+    translation: 'adivinar',
+    conjugation: { ich: 'rate', du: 'rätst', erSieEs: 'rät', wir: 'raten', ihr: 'ratet', sieSie: 'raten' },
+  },
+  {
+    infinitive: 'bestellen',
+    translation: 'pedir (en restaurante) / ordenar',
+    conjugation: { ich: 'bestelle', du: 'bestellst', erSieEs: 'bestellt', wir: 'bestellen', ihr: 'bestellt', sieSie: 'bestellen' },
+  },
+  {
+    infinitive: 'öffnen',
+    translation: 'abrir',
+    conjugation: { ich: 'öffne', du: 'öffnest', erSieEs: 'öffnet', wir: 'öffnen', ihr: 'öffnet', sieSie: 'öffnen' },
+  },
+  {
+    infinitive: 'tippen',
+    translation: 'escribir a máquina / teclear',
+    conjugation: { ich: 'tippe', du: 'tippst', erSieEs: 'tippt', wir: 'tippen', ihr: 'tippt', sieSie: 'tippen' },
+  },
+  {
+    infinitive: 'tragen',
+    translation: 'llevar / cargar',
+    conjugation: { ich: 'trage', du: 'trägst', erSieEs: 'trägt', wir: 'tragen', ihr: 'tragt', sieSie: 'tragen' },
+  },
+  {
+    infinitive: 'vorbereiten',
+    translation: 'preparar',
+    conjugation: { ich: 'bereite vor', du: 'bereitest vor', erSieEs: 'bereitet vor', wir: 'bereiten vor', ihr: 'bereitet vor', sieSie: 'bereiten vor' },
+  },
+  {
+    infinitive: 'wählen',
+    translation: 'elegir / marcar (tel.)',
+    conjugation: { ich: 'wähle', du: 'wählst', erSieEs: 'wählt', wir: 'wählen', ihr: 'wählt', sieSie: 'wählen' },
+  },
+  {
+    infinitive: 'telefonieren',
+    translation: 'telefonear',
+    conjugation: { ich: 'telefoniere', du: 'telefonierst', erSieEs: 'telefoniert', wir: 'telefonieren', ihr: 'telefoniert', sieSie: 'telefonieren' },
+  },
+  {
+    infinitive: 'zubereiten',
+    translation: 'preparar (comida)',
+    conjugation: { ich: 'bereite zu', du: 'bereitest zu', erSieEs: 'bereitet zu', wir: 'bereiten zu', ihr: 'bereitet zu', sieSie: 'bereiten zu' },
+  },
+  {
+    infinitive: 'planen',
+    translation: 'planificar',
+    conjugation: { ich: 'plane', du: 'planst', erSieEs: 'plant', wir: 'planen', ihr: 'plant', sieSie: 'planen' },
+  },
+  {
+    infinitive: 'reagieren',
+    translation: 'reaccionar',
+    conjugation: { ich: 'reagiere', du: 'reagierst', erSieEs: 'reagiert', wir: 'reagieren', ihr: 'reagiert', sieSie: 'reagieren' },
+  },
+  {
+    infinitive: 'präsentieren',
+    translation: 'presentar',
+    conjugation: { ich: 'präsentiere', du: 'präsentierst', erSieEs: 'präsentiert', wir: 'präsentieren', ihr: 'präsentiert', sieSie: 'präsentieren' },
+  },
+  {
+    infinitive: 'bitten',
+    translation: 'pedir / rogar',
+    conjugation: { ich: 'bitte', du: 'bittest', erSieEs: 'bittet', wir: 'bitten', ihr: 'bittet', sieSie: 'bitten' },
+  },
 ]

@@ -52,6 +52,21 @@ import {
   Fish,
   Circle,
   Package,
+  ShoppingCart,
+  List,
+  ListOrdered,
+  Pen,
+  Dumbbell,
+  Croissant,
+  Rat,
+  Keyboard,
+  Backpack,
+  Hand,
+  Flame,
+  Smile,
+  AlertCircle,
+  Newspaper,
+  MessageCircle,
 } from 'lucide-react'
 
 const ICON_MAP = {
@@ -108,6 +123,21 @@ const ICON_MAP = {
   Fish,
   Circle,
   Package,
+  ShoppingCart,
+  List,
+  ListOrdered,
+  Pen,
+  Dumbbell,
+  Croissant,
+  Rat,
+  Keyboard,
+  Backpack,
+  Hand,
+  Flame,
+  Smile,
+  AlertCircle,
+  Newspaper,
+  MessageCircle,
 }
 
 export function NounIcon({ name, size = 32, className = '' }) {

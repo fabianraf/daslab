@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { CATEGORIES, NOUNS, getCategory } from './data/nouns'
 import { NounIcon } from './components/NounIcon'
+import { PageNav } from './components/PageNav'
 import './App.css'
 
 const GAME_TYPES = [
@@ -299,20 +300,7 @@ export default function App() {
           <span className="title-lab">Lab</span>
         </h1>
         <p className="subtitle">Practica los artículos en alemán / Artikel üben</p>
-        <nav className="practice-nav" aria-label="Otras secciones">
-          <Link to="/" className="practice-section-link practice-section-link--inicio">
-            ← Inicio / Start
-          </Link>
-          <Link to="/artikel" className="practice-section-link practice-section-link--table">
-            Artículos / Artikel
-          </Link>
-          <Link to="/grammatik" className="practice-section-link practice-section-link--grammatik">
-            Grammatik
-          </Link>
-          <Link to="/verben" className="practice-section-link practice-section-link--verben">
-            Verbos / Verben
-          </Link>
-        </nav>
+        <PageNav />
 
         <div className="mode-panel">
           <p className="mode-label">Juegos</p>

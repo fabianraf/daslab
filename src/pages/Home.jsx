@@ -17,8 +17,14 @@ const SECTIONS = [
   {
     to: '/grammatik',
     title: 'Grammatik',
-    subtitle: 'Akkusativ, Dativ e Imperativ',
+    subtitle: 'Akkusativ, Dativ, Possessiv, Imperativ',
     className: 'home-card--grammatik',
+  },
+  {
+    to: '/modalverben',
+    title: 'Modalverben',
+    subtitle: 'können, müssen, wollen, mögen',
+    className: 'home-card--modalverben',
   },
   {
     to: '/verben',

@@ -1,0 +1,48 @@
+.page-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.page-nav-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: #fff;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.page-nav-link:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  color: #fff;
+}
+
+.page-nav-link--inicio {
+  background: linear-gradient(135deg, #4b5563 0%, #6b7280 100%);
+}
+
+.page-nav-link--artikel {
+  background: linear-gradient(135deg, var(--accent) 0%, #c084fc 100%);
+}
+
+.page-nav-link--ueben {
+  background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+}
+
+.page-nav-link--grammatik {
+  background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
+}
+
+.page-nav-link--modalverben {
+  background: linear-gradient(135deg, #06b6d4 0%, #0ea5e9 100%);
+}
+
+.page-nav-link--verben {
+  background: linear-gradient(135deg, #10b981 0%, #22c55e 100%);
+}
